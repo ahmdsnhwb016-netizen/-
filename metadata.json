@@ -1,0 +1,6 @@
+{
+  "name": "مساعد الطالب",
+  "description": "تطبيق دراسي ذكي ومتكامل لإدارة المواد والمهام وجلسات التركيز والمساعد التعليمي المدعوم بـ Gemini",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

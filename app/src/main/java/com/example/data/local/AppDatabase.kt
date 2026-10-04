@@ -1,0 +1,46 @@
+package com.example.data.local
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.data.local.dao.StudentDao
+import com.example.data.local.entity.*
+
+@Database(
+    entities = [
+        UserProfileEntity::class,
+        SubjectEntity::class,
+        TaskEntity::class,
+        StudySessionEntity::class,
+        WeakPointEntity::class,
+        ReviewItemEntity::class,
+        NoteEntity::class,
+        GoalEntity::class,
+        AchievementEntity::class
+    ],
+    version = 1,
+    exportSchema = false
+)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun studentDao(): StudentDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getDatabase(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "student_assistant_database"
+                )
+                    .fallbackToDestructiveMigration(true)
+                    .build()
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
+}
